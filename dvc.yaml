@@ -1,0 +1,29 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - data/dataset.csv
+    - src/common.py
+    - src/prepare.py
+    params:
+    - configs/config.yaml:
+      - data.random_state
+      - data.test_size
+      - data.val_size
+    outs:
+    - data/processed
+  train:
+    cmd: python src/train.py --candidate rf_large --use-processed --save-local 
+      --purpose pipeline --run-name pipeline_rf_large
+    deps:
+    - data/processed
+    - src/common.py
+    - src/train.py
+    params:
+    - configs/config.yaml:
+      - candidates.rf_large
+    outs:
+    - models/model.joblib
+    metrics:
+    - reports/metrics.json:
+        cache: false
