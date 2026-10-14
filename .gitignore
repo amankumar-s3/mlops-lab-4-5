@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+mlflow.db
+mlruns/
+mlartifacts/
+data/raw/
+kaggle.json
+.ipynb_checkpoints/

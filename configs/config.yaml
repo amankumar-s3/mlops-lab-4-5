@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------
+# Central configuration for Lab 4 (MLflow) and Lab 5 (DVC)
+# Dataset: Kaggle "California Housing Prices" (camnugent/california-housing-prices)
+# To use another Kaggle regression CSV, change the `data` block only.
+# ---------------------------------------------------------------
+data:
+  path: data/dataset.csv
+  target: median_house_value
+  numeric_features:
+    - longitude
+    - latitude
+    - housing_median_age
+    - total_rooms
+    - total_bedrooms
+    - population
+    - households
+    - median_income
+  categorical_features:
+    - ocean_proximity
+  test_size: 0.15        # fraction of all rows kept for the final test set
+  val_size: 0.15         # fraction of all rows used for model selection
+  random_state: 42
+  processed_dir: data/processed
+
+mlflow:
+  db_file: mlflow.db                 # SQLite backend store (needed for Model Registry)
+  experiment_name: house-price-lab
+  registered_model_name: HousePriceModel
+
+# Candidate models. Each one becomes one MLflow run.
+candidates:
+  ridge_baseline:
+    model: ridge
+    params: {alpha: 1.0}
+    description: "Linear baseline (Ridge regression)"
+  rf_small:
+    model: random_forest
+    params: {n_estimators: 50, max_depth: 8, min_samples_leaf: 5, random_state: 42, n_jobs: -1}
+    description: "Small, shallow random forest"
+  rf_large:
+    model: random_forest
+    params: {n_estimators: 200, max_depth: 20, min_samples_leaf: 2, random_state: 42, n_jobs: -1}
+    description: "Larger, deeper random forest"
+  gbr:
+    model: gradient_boosting
+    params: {n_estimators: 300, learning_rate: 0.08, max_depth: 4, subsample: 0.8, random_state: 42}
+    description: "Gradient boosting regressor"
+
+# Acceptance rule used BEFORE promotion (evaluated on the held-out TEST split).
+acceptance:
+  max_test_rmse: 65000
+  min_test_r2: 0.70
+  require_signature: true
+
+# Controlled dataset changes used in Lab 5 (dataset_tools.py)
+dataset_changes:
+  v2: "Drop rows with missing values in numeric features (data-quality fix)"
+  v3: "Also drop rows where the target is at its maximum value (censored/capped prices)"
