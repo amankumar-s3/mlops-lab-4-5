@@ -1,0 +1,8 @@
+time,model_version,lifecycle_state,action,evidence_reason
+2026-10-14 07:34:04 UTC,v1,Staging/Candidate,alias 'candidate' -> v1,awaiting validation; rule: test RMSE <= 65000 AND test R2 >= 0.7 AND signature present
+2026-10-14 07:34:07 UTC,v1,Staging/Candidate,validation passed,"test RMSE=57984, R2=0.743, signature=True"
+2026-10-14 07:34:10 UTC,v1,Production,alias 'production' -> v1,"validation passed (test RMSE=57983.99, R2=0.7434)"
+2026-10-14 07:34:14 UTC,v3,Staging/Candidate,alias 'candidate' -> v3,awaiting validation; rule: test RMSE <= 65000 AND test R2 >= 0.7 AND signature present
+2026-10-14 07:34:17 UTC,v3,Staging/Candidate,validation passed,"test RMSE=49588, R2=0.812, signature=True"
+2026-10-14 07:34:19 UTC,v3,Production,alias 'production' -> v3,"validation passed (test RMSE=49588.48, R2=0.8124)"
+2026-10-14 07:34:19 UTC,v1,Archived/Retired,"aliases removed, tag lifecycle_state=archived",superseded by v3 (lower test RMSE)

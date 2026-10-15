@@ -1,0 +1,5 @@
+| Version   | Source run ID                    | Candidate   |   val RMSE |   val R2 |   test RMSE | Change/description                                                                                              |
+|:----------|:---------------------------------|:------------|-----------:|---------:|------------:|:----------------------------------------------------------------------------------------------------------------|
+| v1        | 4aaa0714392c4fba9a9a63406a0c44f0 | rf_small    |      58366 |    0.745 |       57984 | Small, shallow random forest (n_estimators=50, max_depth=8, min_samples_leaf=5, random_state=42, n_jobs=-1)     |
+| v2        | b77408f6839c4f138bb337b545568c37 | rf_large    |      50216 |    0.812 |       49895 | Larger, deeper random forest (n_estimators=200, max_depth=20, min_samples_leaf=2, random_state=42, n_jobs=-1)   |
+| v3        | 4f2298b134e24e1b80920c6686273728 | gbr         |      48841 |    0.822 |       49588 | Gradient boosting regressor (n_estimators=300, learning_rate=0.08, max_depth=4, subsample=0.8, random_state=42) |

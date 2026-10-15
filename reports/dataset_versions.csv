@@ -1,0 +1,4 @@
+Version,Git commit,Rows,Columns,Size (bytes),MD5,Change description
+dataset-v1,f8004513,20640,10,1423529,d1c47305887e2252bf1ccbd74ff159a6,Baseline: raw Kaggle CSV
+dataset-v2,6d240dfb,20433,10,1410260,a318928dbfac44fb24738b5bda1aaaf1,Dropped rows with missing numeric features
+dataset-v3,fd9c087a,19475,10,1342975,ad9f215fb18c5671ff4082c6c2fad273,Also dropped rows with capped (max) target value
